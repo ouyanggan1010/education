@@ -1,0 +1,29 @@
+// rest
+*{
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+// 定义基础尺寸
+html{
+    height: 100%;
+    width: 100%;
+}
+body{
+    margin: 0;
+    font-family:Helvetica;
+    background: #f5f6fa;
+    height: 100%;
+    width: 100%;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+.navBar{
+    background-color: #ededed;
+}

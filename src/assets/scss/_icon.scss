@@ -1,0 +1,265 @@
+//sprit
+.sprite {
+    background: url(../images/sprite.png) no-repeat 0 0;
+    background-size: 750px;
+    display: inline-block;
+    //登录logo
+    &.sprite-logo {
+        background-position:  0 0;
+        width: 252px;
+	    height: 268px;
+    }
+    // 登录用户图标
+    &.sprite-user {
+        background-position: 36.806% 0.844%;
+        width: 30px;
+	    height: 30px;
+    }
+    // 登录密码图标
+    &.sprite-password {
+        background-position:42.639% 0.844%;
+        width: 30px;
+	    height: 30px;
+    }
+    // 登录证件图标
+    &.sprite-card {
+        background-position:48.954% 1.222%;
+        width: 33px;
+	    height: 25px;
+    }
+    // 手机图标
+    &.sprite-phone {
+        background-position:93.103% 0.846%;
+        width: 25px;
+	    height: 33px;
+    }
+    // 注册页面已阅读图标
+    &.sprite-checkbox-active {
+        background-position:93.213% 4.824%;
+        width: 28px;
+	    height: 28px;
+    }
+    // 注册页面未阅读图标
+    &.sprite-checkbox {
+        background-position:98.199% 4.594%;
+        width: 29px;
+	    height: 29px;
+    }
+    // home首页服务指南图标
+    &.sprite-service {
+        background-position: 67.121% 76.596%;
+        width: 90px;
+        height: 112px;
+    }
+     // home首页学校查询图标
+     &.sprite-school {
+        background-position:  65.056% 10.456%;
+        width: 129px;
+        height: 129px;
+    }
+    // home首页服务指南字体
+    &.sprite-service-font {
+        background-position:  98.546% 23.696%;
+        width: 131px;
+	    height: 30px;
+    }
+     // home首页学校查询字体
+     &.sprite-school-font {
+        background-position: 98.869% 32.261%;
+        width: 131px;
+	    height: 29px;
+    }
+    // home首页申请登记图标
+    &.sprite-home-checkIn {
+        background-position: 51.786% 3.654%;
+        width: 78px;
+	    height: 75px;
+    }
+    // home首页高亮图标
+    &.sprite-home-active {
+        background-position: 63.778% 0.387%;
+        width: 46px;
+        height: 42px;
+    }
+    // home首页默认图标
+    &.sprite-home {
+        background-position: 71.53% 0.387%;
+        width: 44px;
+        height: 42px;
+    }
+    // home首页右箭头图标
+    &.sprite-arrow-right {
+        background-position: 42.916% 5.495%;
+        width: 23px;
+	    height: 42px;
+    }
+    // home首页左箭头图标
+    &.sprite-arrow-left {
+        background-position: 36.039% 5.495%;
+        width: 23px;
+	    height: 42px;
+    }
+    // home首页个人中心高亮图标
+    &.sprite-personal-active {
+        background-position: 79.184% 0.54%;
+        width: 78px;
+	    height: 75px;
+    }
+    // home首页个人中心默认图标
+    &.sprite-personal {
+        background-position: 86.275% 0.54%;
+        width: 36px;
+	    height: 37px;
+    }
+    // 按钮渐变蓝色背景
+    &.sprite-btn-blue {
+        background-position:5.625% 22.793%;
+        width: 590px;
+        height: 88px;
+    }
+    // 按钮渐变红色背景
+    &.sprite-btn-blue {
+        background-position:5.625% 31.14%;
+        width: 590px;
+	    height: 88px;
+    }
+    // 学校查询
+    &.sprite-school-tag {
+        background-position:1.636% 38.558%;
+        width: 200px;
+        height: 58px;
+    }
+    // 中职招生学校
+    &.sprite-school-town {
+        background-position:66.239% 46.124%;
+        width: 48px;
+	    height: 44px;
+    }
+    // 中职公告
+    &.sprite-school-volmu {
+        background-position:51.679% 17.893%;
+        width: 65px;
+	    height: 43px;
+    }
+    // 个人中心个人信息图标
+    &.sprite-personal-information {
+        background-position:71.61% 5.202%;
+        width: 42px;
+        height: 46px;
+    }
+    // 个人中心家庭成员图标
+    &.sprite-personal-family {
+        background-position:79.487% 4.25%;
+        width: 48px;
+	    height: 40px;
+    }
+    // 个人中心安全中心图标
+    &.sprite-personal-secure {
+        background-position:86.816% 4.334%;
+        width: 37px;
+	    height: 42px;
+    }
+    // 个人中心我的申报图标
+    &.sprite-personal-report {
+        background-position:63.472% 5.774%;
+        width: 30px;
+	    height: 35px;
+    }
+    // 个人中心我的头像图标
+    &.sprite-personal-my {
+        background-position:91.86% 9.106%;
+        width: 148px;
+	    height: 148px;
+    }
+    // 个人中心编辑图标
+    &.sprite-personal-edit {
+        background-position:98.615% 18.836%;
+        width: 28px;
+	    height: 28px;
+    }
+    // 申报查看原因
+    &.sprite-personal-check {
+        background-position:90.098% 26.794%;
+        width: 33px;
+	    height: 24px;
+    }
+    // 关闭图标
+    &.sprite-close {
+        background-position:85.077% 20.446%;
+        width: 33px;
+	    height: 33px;
+    }
+    // 申报详情
+    &.sprite-detail {
+        background-position:84.488% 26.876%;
+        width: 28px;
+	    height: 28px;
+    }
+    // 上传资料
+    &.sprite-upload {
+        background-position:84.658% 29.516%;
+        width: 33px;
+	    height: 33px;
+    }
+    // 已通过
+    &.sprite-pass {
+        background-position:43.219% 45.795%;
+        width: 197px;
+	    height: 133px;
+    }
+    // 未通过
+    &.sprite-nopass {
+        background-position:2.17% 47.127%;
+        width: 197px;
+	    height: 133px;
+    }
+    // 成员图标
+    &.sprite-family {
+        background-position:96.197% 26.84%;
+        width: 40px;
+	    height: 30px;
+    }
+    // 个人图标
+    &.sprite-person {
+        background-position:90.251% 29.538%;
+        width: 32px;
+	    height: 34px;
+    }
+    // 安全图标
+    &.sprite-safety {
+        background-position:95.397% 29.507%;
+        width: 33px;
+	    height: 36px;
+    }
+    // 我的申报高亮图标
+    &.sprite-report {
+        background-position:93.036% 20.584%;
+        width: 32px;
+	    height: 32px;
+    }
+    // 上传图片
+    &.sprite-upload-image {
+        background-position: 1.929% 67.484%;
+        width: 128px;
+	    height: 110px;
+    }
+    // 搜索图标
+    &.sprite-search {
+        background-position:3.396% 93.436%;
+        width: 161px;
+	    height: 161px;
+    }
+    // 蓝色消息标识
+    &.sprite-msg-blue {
+        background-position:23.989% 67.152%;
+        width: 33px;
+	    height: 28px;
+    }
+    // 红色消息标识
+    &.sprite-msg-red {
+        background-position:36.402% 67.152%;
+        width: 33px;
+	    height: 28px;
+    }
+    // <div class="sprite sprite-logo"></div>
+}
