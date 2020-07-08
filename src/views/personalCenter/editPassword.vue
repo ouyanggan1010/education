@@ -13,7 +13,7 @@
         <van-field
           v-model="password"
           name="password"
-          placeholder="请输入原密码"
+          placeholder="请填写原密码"
           :rules="[{ required: true, message:'原密码输入有误' }]"
         />
       </div>
@@ -23,8 +23,8 @@
           type="password"
           v-model="newpassword"
           name="newpassword"
-          placeholder="请输入新密码(至少6位)"
-          :rules="[{ required: true,pattern:/\S{6,}/, message:'新密码输入有误' }]"
+          placeholder="包含字母和数字，8~20位"
+          :rules="[{ required: true, message:'新密码输入有误' }]"
         />
       </div>
       <div class="inputDiv">
@@ -33,7 +33,7 @@
           type="password"
           v-model="confirmpassword"
           name="confirmpassword"
-          placeholder="请再次确认新密码"
+          placeholder="请再次输入密码"
           :rules="[{ required: true,validator, message:'确认新密码输入有误' }]"
         />
       </div>

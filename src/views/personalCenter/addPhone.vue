@@ -14,7 +14,7 @@
           type="number"
           v-model="scPhonenumber"
           name="scPhonenumber"
-          placeholder="请输入手机号"
+          placeholder="请填写常用手机号码"
           :rules="[{ required: true,pattern:/^1[34578]\d{9}$/, message:'手机号输入有误' }]"
         />
       </div>

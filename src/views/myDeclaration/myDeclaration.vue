@@ -140,10 +140,10 @@
           </div>
         </van-overlay>
         <!-- 消息 -->
-        <van-overlay :show="showBoxMesg" class-name="boxWrapper" @click="showBoxMesg = false">
+        <van-overlay :show="showBoxMesg" class-name="boxWrapper" @click="lookMesgClose">
           <div class="block msg" @click.stop>
             <!-- 关闭按钮 -->
-            <div class="delete sprite sprite-close" @click="showBoxMesg = false"></div>
+            <div class="delete sprite sprite-close" @click="lookMesgClose"></div>
             <div class="text">
               {{mesgText.msgContent}}
               <!-- 您已摇中
@@ -393,6 +393,11 @@ export default {
       } catch (error) {
         this.$toast.fail("处理异常");
       }
+    },
+    // 查看消息弹框关闭
+    lookMesgClose(){
+      this.showBoxMesg = false;
+      this.getList();
     },
     // ---------------------------请求函数--------------------------- //
     // 获取列表信息

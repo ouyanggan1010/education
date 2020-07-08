@@ -84,7 +84,7 @@
         v-model="model.area"
         name="area"
         label="现居住区域"
-        placeholder="请选择现居住区域"
+        placeholder="请选择区"
         right-icon="arrow"
         @click="pickerAreaBox"
         readonly
@@ -92,7 +92,7 @@
       <!-- -------------------------现居住区域选择面板------------------------- -->
       <van-popup v-model="showPickerArea" round position="bottom">
         <van-picker
-          title="请选择区域"
+          title="请选择区"
           show-toolbar
           :columns="columnsArea"
           :default-index="columnsAreaIndex"
@@ -108,7 +108,7 @@
         v-model="model.areaAddress"
         name="areaAddress"
         label="详细居住地址"
-        placeholder="请输入详细居住地址"
+        placeholder="请填写路段、小区、门牌号"
       />
       <!-- 标题：户籍信息 -->
       <div class="title mt-20">
@@ -167,7 +167,7 @@
         v-model="model.domicileAddress"
         name="domicileAddress"
         label="详细户籍地址"
-        placeholder="请输入详细户籍地址"
+        placeholder="填写户口本上落户地址"
       />
       <!-- 标题：其他 -->
       <div class="title mt-20">
