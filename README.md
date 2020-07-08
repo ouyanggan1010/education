@@ -1,3 +1,11 @@
+<!--
+ * @Author: lck
+ * @Date: 2020-06-30 08:42:31
+ * @LastEditTime: 2020-07-08 08:31:04
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \education\README.md
+--> 
 
 # education
 
@@ -10,11 +18,13 @@ npm install
 ```
 npm run serve
 ```
+"serve": "vue-cli-service serve",//本地开发运行，会把process.env.NODE_ENV设置为'development'
 
 ### Compiles and minifies for production
 ```
 npm run build
 ```
+"build": "vue-cli-service build", // 默认打包模式，会把process.env.NODE_ENV设置为'production'
 
 ### Run your tests
 ```

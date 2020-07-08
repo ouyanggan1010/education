@@ -1,5 +1,4 @@
 
-
 <template>
     <div class="registry">
         <van-nav-bar title="幼儿园入学申请登记" fixed @click-left="$router.back()" class="navBar">
@@ -12,7 +11,7 @@
             <div class="cells">
                 <van-radio-group v-model="radio">
                     <!-- 海口户籍 -->
-                    <van-cell is-link title-class="d-flex ai-center" clickable  v-for="(item,index) in list" :key="index">
+                    <van-cell  title-class="d-flex ai-center" clickable  v-for="(item,index) in list" :key="index">
                         <template #title>
                             <van-radio :name="index + 1" class="text_size">{{item.census}}</van-radio>
                         </template>

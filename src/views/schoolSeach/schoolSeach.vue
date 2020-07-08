@@ -43,7 +43,6 @@ export default {
     //   console.log(this.$refs.downFresh)
     },  
     schoolDetail(scId){
-        console.log(scId)
         if(scId.index == 3){
             this.$router.push({
                path: '/home/schoolIntroduce',

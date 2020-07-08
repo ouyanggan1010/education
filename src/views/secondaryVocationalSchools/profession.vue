@@ -46,14 +46,16 @@
     .write_information {
         height: 100%;
         .main{
+            font-size: 30px;
             height: 90%; 
             .header_notice{
                 padding: 25px;
-                font-size: 30px;
+                font-size: 35px;
                 font-weight: normal;
                 text-align: center;
             }
           .cells {
+                font-size: 32px;
                 background: #fff; 
                 line-height: 60px;
                 padding: 25px;

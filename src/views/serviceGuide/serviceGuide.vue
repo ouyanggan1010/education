@@ -16,7 +16,7 @@
                 </form>
             </van-sticky>
         </div>
-        <van-empty description="空空如也" v-if="isEmpty" />
+        <van-empty description="暂无数据" v-if="isEmpty" />
         <div class="list-body" v-if="!isEmpty" style="height:100%">
             <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
                 <van-list 
@@ -26,7 +26,7 @@
                     finished-text="没有更多了" 
                     @load="onLoad"
                 >
-                    <van-cell 
+                    <van-cell class="cell_title"
                         v-for="(item, index) in listData" 
                         :key="index" 
                         :title="item.guideTitle" 
@@ -182,5 +182,11 @@
         padding-right: 5px;
     }
 }
-    
+.cell_title{
+    .van-cell__title{
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+}    
 </style>

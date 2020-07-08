@@ -43,6 +43,7 @@ export default {
   components: {},
   data() {
     return {
+      pathTo: "",
       // 存储标题
       titleList: [
         {
@@ -70,20 +71,18 @@ export default {
         applyId: "",
         schoolArea: "",
         applySchool: "",
-        imagesReq: {}
-      },
-      // 要上传到后台的信息
-      uploadData: {
-        // 监护人与孩子的户口簿的图片数组
-        custodianChildAccountImages: "",
-        // 出生证明的图片数组
-        birthCertificateImages: "",
-        // 监护人身份证的图片数组
-        custodianIdCardImages: "",
-        // 预防接种本的图片数组
-        vaccinationImages: "",
-        // 居住证/房产证/工作证的图片数组
-        proveImages: ""
+        imagesReq: {
+          // 监护人与孩子的户口簿的图片数组
+          custodianChildAccountImages: "",
+          // 出生证明的图片数组
+          birthCertificateImages: "",
+          // 监护人身份证的图片数组
+          custodianIdCardImages: "",
+          // 预防接种本的图片数组
+          vaccinationImages: "",
+          // 居住证/房产证/工作证的图片数组
+          proveImages: ""
+        }
       }
     };
   },
@@ -142,20 +141,41 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
     this.model = this.$route.query;
+    if (localStorage.pathTo === "/personal/myDeclaration") {
+      const res = await this.$http.get(
+        `/mobile/user/getApplyFileDetailById/${this.model.applyId}`
+      );
+      if (res.data.code === 0) {
+        const imgsData = res.data.data;
+        const imagesReq = {
+          // 监护人与孩子的户口簿的图片数组
+          custodianChildAccountImages: imgsData.custodianChildAccountImages,
+          // 出生证明的图片数组
+          birthCertificateImages: imgsData.birthCertificateImages,
+          // 监护人身份证的图片数组
+          custodianIdCardImages: imgsData.custodianIdCardImages,
+          // 预防接种本的图片数组
+          vaccinationImages: imgsData.vaccinationImages,
+          // 居住证/房产证/工作证的图片数组
+          proveImages: imgsData.proveImages
+        };
+        localStorage.uploadData = JSON.stringify(imagesReq);
+      } else {
+        // 清除上传图片的数据
+        localStorage.uploadData = "";
+      }
+    }
     // 判断是否有上传的图片缓存
     const dataStr = localStorage.uploadData;
     if (dataStr) {
-      this.uploadData = JSON.parse(dataStr);
-      this.model.imagesReq = this.uploadData;
+      this.model.imagesReq = JSON.parse(dataStr);
     }
   },
-  beforeRouteEnter(to, from, next) {
-    if (from.path !== "/personal/uploadData/uploadImg") {
-      // 清除上传图片的数据
-      localStorage.uploadData = "";
-    }
+  // 进入路由之前执行的函数
+  async beforeRouteEnter(to, from, next) {
+    localStorage.pathTo = from.path;
     next();
   }
 };

@@ -59,7 +59,6 @@
                     <!-- 证件类型 -->
                     <van-field 
                     v-model="childTwoInfoIdTypeChange" 
-                    right-icon="arrow" 
                     name="证件类型" 
                     label="证件类型"
                     placeholder="请选择适龄幼儿证件类型" 
@@ -79,8 +78,7 @@
                     <van-field v-model="sexTwoChange" name="性别" label="性别" placeholder="请选择性别" readonly />
                 </div>
                 <!-- 现居住区域 -->
-                <van-field v-model="scChildInfo.childArea" name="现居住区域" label="现居住区域" placeholder="请选择现居住区域"
-                    right-icon="arrow" readonly/>
+                <van-field v-model="scChildInfo.childArea" name="现居住区域" label="现居住区域" placeholder="请选择现居住区域" readonly/>
                 <!-- 详细户籍地址 -->
                 <van-field rows="2" autosize type="textarea" v-model="scChildInfo.childAddress" name="详细户籍地址"
                     label="详细户籍地址" placeholder="请输入详细户籍地址" />
@@ -111,7 +109,6 @@
                 <!-- 证件类型 -->
                 <van-field 
                   v-model="fatherIdType" 
-                  right-icon="arrow" 
                   name="证件类型" 
                   label="证件类型"
                   placeholder="请选择证件类型" 
@@ -129,7 +126,6 @@
                  <!-- 证件类型 -->
                 <van-field 
                   v-model="motherIdType" 
-                  right-icon="arrow" 
                   name="证件类型" 
                   label="证件类型"
                   placeholder="请选择证件类型" 
@@ -192,7 +188,7 @@
                         :key="j"
                         :title="item.name"
                         is-link
-                        :to="{path:'/personal/uploadData/uploadImg',query:item}"
+                        :to="{path:'/home/kindergarten/lookImg',query:item}"
                     />
                  </div>
             </van-form>
@@ -220,7 +216,7 @@
                     "childArea": "",
                     "childAddress": ""
                 },
-             // 存储标题
+                // 存储标题
                 titleList: [
                     {
                     name: "监护人与孩子的户口簿",
@@ -445,12 +441,15 @@
         },
         created() {
             const applyId =  this.$route.params.applyId;
-            // if(this.$route.params.type == '1'){
-            //     this.type = true
-            // }
+            const childState =  this.$route.params.type;
+            if(childState == 5){
+                this.type = true;
+                this.getApplyFileDetail(applyId);
+            }
             this.getDetail(applyId);
         },
         methods: {
+            // 获取申请信息详情
             async getDetail(applyId){
                 const res =  await this.$http.get(`/mobile/user/applydetail/${applyId}`);
                 if(res.data.code == 0){
@@ -468,7 +467,31 @@
                         Object.assign(this.chilrenTwoInfo,res.data.data.scChildInfo[1]);
                     }
                 }
-            }
+            },
+            // 获取上传资料详情
+            async getApplyFileDetail(applyId){
+                const res =  await this.$http.get(`/mobile/user/getApplyFileDetailById/${applyId}`);
+                // console.log(res)
+                if (res.data.code === 0) {
+                    const imgsData = res.data.data;
+                    const imagesReq = {
+                        // 监护人与孩子的户口簿的图片数组
+                        custodianChildAccountImages: imgsData.custodianChildAccountImages,
+                        // 出生证明的图片数组
+                        birthCertificateImages: imgsData.birthCertificateImages,
+                        // 监护人身份证的图片数组
+                        custodianIdCardImages: imgsData.custodianIdCardImages,
+                        // 预防接种本的图片数组
+                        vaccinationImages: imgsData.vaccinationImages,
+                        // 居住证/房产证/工作证的图片数组
+                        proveImages: imgsData.proveImages
+                    };
+                    localStorage.applyFileData = JSON.stringify(imagesReq);
+                } else {
+                    // 清除上传图片的数据
+                    localStorage.applyFileData = "";
+                }
+            },
         }
     }
 </script>

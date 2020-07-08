@@ -40,13 +40,13 @@
             <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==1">已摇中</div>
             <!-- 已摇中---资料已上传 资料核实：0通过 1未通过 2核实中 3待核实 -->
             <!-- 资料待核实 -->
-            <div class="statusGreen" v-if="item.childState==5 && item.verifyStatus==3">资料待核实</div>
+            <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==3">资料待核实</div>
             <!-- 资料核实中 -->
-            <div class="statusGreen" v-if="item.childState==5 && item.verifyStatus==2">资料核实中</div>
+            <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==2">资料核实中</div>
             <!-- 资料已核实 -->
-            <div class="statusBlue" v-if="item.childState==5 && item.verifyStatus==0">资料已核实</div>
+            <div class="statusBlue" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==0">资料已核实</div>
             <!-- 资料未通过核实 -->
-            <div class="statusRed" v-if="item.childState==5 && item.verifyStatus==1">资料未通过核实</div>
+            <div class="statusRed" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==1">资料未通过核实</div>
 
             <!-- 已摇中：资料未上传 学校某某幼儿园 -->
             <div
@@ -81,7 +81,7 @@
           <router-link
             class="edit"
             v-if="item.childState==1 || item.childState==2 || item.childState==5 || item.childState==7 || item.childState==6"
-            :to="{path:'/home/lookInformation',name: 'LookInformation',params:{applyId:item.applyId,type:'1'}}"
+            :to="{path:'/home/lookInformation',name: 'LookInformation',params:{applyId:item.applyId,type:item.childState}}"
           >
             <div class="mr-10">详情</div>
             <div class="sprite sprite-detail"></div>
@@ -89,7 +89,7 @@
           <!-- 查看原因：弹框 未通过核实，已摇中--资料未通过核实 -->
           <div
             class="lookMesg"
-            v-if="item.childState==3 || (item.childState==5 && item.verifyStatus==1)"
+            v-if="item.childState==3 || (item.childState==5 && item.uploadImages==0 && item.verifyStatus==1)"
             @click="lookReason(item)"
           >
             <div class="sprite sprite-personal-check"></div>
@@ -111,7 +111,7 @@
           <!-- 上传资料：已摇中（未上传资料），摇中后补，已摇中--资料待核实，已摇中--资料未核实 -->
           <router-link
             class="upload"
-            v-if="(item.childState==5 && item.uploadImages==1) || item.childState==7 || (item.childState==5 && item.verifyStatus==3) || (item.childState==5 && item.verifyStatus==1)"
+            v-if="(item.childState==5 && item.uploadImages==1) || item.childState==7 || (item.childState==5 && item.uploadImages==0 && item.verifyStatus==3) || (item.childState==5 && item.uploadImages==0 && item.verifyStatus==1)"
             :to="{path:'/personal/uploadData',query:{applyId:item.applyId,schoolArea:item.schoolArea,applySchool:item.applySchool}}"
           >
             <div class="mr-10">上传资料</div>

@@ -39,14 +39,12 @@
         <div class="tab-content">
             <van-tabs v-model="active" color="#498ef5" title-active-color="#66a1fb">
                 <van-tab title="学校简介">
-                    <div class="content" v-html="detail.scInstructions">
+                    <div class="content" v-html="detail.scSchoolBrief">
                        海口市机关幼儿园创办于1960年，是一所公立性政府为主导的全日制幼儿园，1997年首批被评为省示范园，2006年以第一名的优异成绩通过省示范园的复查评估。是全国13所贯彻《纲要》试点园之一，全省贯彻落实《指南》省级实验区的骨干实验园。多次被评为省、市幼教先进集体；省、市教学科研先进单位；省、市精神文明单位；省、市卫生先进单位和安全工作先进单位。该园现有15个年龄班，524名幼儿，总占地面积5656.61平方米，总建筑面积10300平方米，绿化覆盖面积960平方米，运动场地面积2800平方米。2016年，园所进行了整体装修，不仅提升了审美的格调，更在环境的细节中透出教育的真谛，是孩子们幸福生活、健康成长的乐园。
                     </div>
                 </van-tab>
                 <van-tab title="招生说明">
-                   <div class="content">
-                      {{detail.scPlan}}
-                    </div>
+                   <div class="content" v-html="detail.scInstructions"></div>
                 </van-tab>
             </van-tabs>
         </div>
@@ -70,7 +68,7 @@
                 const res = await this.$http.get(`/mobile/school/info/${scId}`);
                 if(res.data.code === 0){
                     this.detail = res.data.data
-                    console.log(this.detail)
+                    // console.log(this.detail)
                 }
             },
         }

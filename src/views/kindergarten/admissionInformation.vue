@@ -7,7 +7,7 @@
         </van-nav-bar>
         <div class="main">
             <div class="header_notice">
-                <van-notice-bar :scrollable="false" background="#f5f6fa" wrapable="true" class="notice_swipe" color="red"
+                <van-notice-bar :scrollable="false" background="#f5f6fa" wrapable class="notice_swipe" color="red"
                     text="所录入的信息必须真实，如提供虚假信息，将导致登记无效。" />
             </div>
             <van-form  class="cells">
@@ -78,7 +78,7 @@
                         @cancel="showPickerCertificateType = false" @confirm="onConfirmCertificateType" />
                 </van-popup>
                 <!-- 证件号码 -->
-                <van-field v-model="chilrenInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
+                <van-field v-model="chilrenInfo.childIdNum"  @input="validID"  name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
                 <!-- 出生日期 -->
                 <van-field
                     v-model="chilrenInfo.childBirthday"
@@ -132,7 +132,7 @@
                             @cancel="showPickerChilrenTwoInfoType = false" @confirm="onConfirmChilrenTwoInfoType" />
                     </van-popup>
                     <!-- 证件号码 -->
-                    <van-field v-model="chilrenTwoInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
+                    <van-field v-model="chilrenTwoInfo.childIdNum" name="证件号码" @input="validID" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
                     <!-- 出生日期 -->
                     <van-field
                         v-model="chilrenTwoInfo.childBirthday"
@@ -233,7 +233,7 @@
                         @cancel="showPickerFatherIdType = false" @confirm="onConfirmFatherIdType" />
                 </van-popup>
                 <!-- 证件号码 -->
-                <van-field v-model="naturalGuardian.fatherIdNuber" name="证件号码" label="证件号码" placeholder="请填写证件号码" />
+                <van-field v-model="naturalGuardian.fatherIdNuber" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]" />
                 <!-- 居住证 -->
                 <van-field v-model="fatherResidencePermit" name="居住证" label="居住证" placeholder="请选择居住证"
                     right-icon="arrow" @click="showPickerResident = true" readonly
@@ -954,6 +954,34 @@
             onConfirmOtResident(value,index) {
                 this.naturalGuardian.otherResident = index;
                 this.showPickerOtResident = false
+            },
+            // 根据输入身份证获取出生日期
+            // 幼儿信息身份证验证
+            async validID(value)
+            {
+                // console.log(value)
+                // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+                let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if (reg.test(value)) {
+                    await this.go(value.length);
+                } 
+            },
+            // 实现自动生成生日，性别，年龄
+            go(val) {
+                let iden = this.chilrenInfo.childIdNum;
+                let idenTwo = this.chilrenTwoInfo.childIdNum;
+                let birth = null;
+                let birthTwo = null;
+                if(val===18){
+                    birth = iden != '' ? iden.substring(6,10)+"-"+iden.substring(10,12)+"-"+iden.substring(12,14):'';
+                    birthTwo = idenTwo !='' ? idenTwo.substring(6,10)+"-"+idenTwo.substring(10,12)+"-"+idenTwo.substring(12,14) :'';
+                }
+                if(val===15){
+                    birth = iden != ''? "19"+ iden.substring(6,8)+"-"+iden.substring(8,10)+"-"+iden.substring(10,12):'';
+                    birthTwo = idenTwo !='' ?  "19"+idenTwo.substring(6,8)+"-"+idenTwo.substring(8,10)+"-"+idenTwo.substring(10,12):'';
+                }
+                this.chilrenInfo.childBirthday = birth;
+                this.chilrenTwoInfo.childBirthday = birthTwo;
             }
         }
     }

@@ -8,12 +8,12 @@
                 </form>
             </van-sticky>
         </div>
-        <van-empty description="空空如也" v-if="isEmpty" />
+        <van-empty description="暂无数据" v-if="isEmpty" />
         <div class="list-body" v-if="!isEmpty">
             <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
                 <van-list v-model="isUploading" :finished="upFinished" :offset="offset" finished-text="没有更多了"
                     @load="onLoad">
-                    <div class="item-list" v-for="(item, index) in listData" :key="index" :id="item.scId"
+                    <div class="item-list" v-for="(item, idx) in listData" :key="idx" :id="item.scId"
                         @click="schoolDetail(item.scId)">
                         <div class="item-card">
                             <div class="item-card-list">
@@ -24,13 +24,15 @@
                                 </div>
                             </div>
                             <div class="Llist-right">
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 0 ">财政拨款公办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 1 ">自收自支公办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 2 ">企事业办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 3 ">高校办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 4 ">部队办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 5 ">普惠性民办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 6 ">非普惠性民办园</span>
+                               <span class="sprite sprite-school-tag" v-if=" item.scLabel == 0 && index == 0">财政拨款公办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 1 && index == 0">自收自支公办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 2 && index == 0">企事业办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 3 && index == 0">高校办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 4 && index == 0">部队办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 5 && index == 0">普惠性民办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 6 && index == 0">非普惠性民办园</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 5 && index == 3">公办</span>
+                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 6 && index == 3">民办</span>
                             </div>
                         </div>
                     </div>

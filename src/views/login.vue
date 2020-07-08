@@ -16,7 +16,7 @@
                             </template>
                         </van-field>
                         <!-- 密码 -->
-                        <van-field v-model="loginForm.password" size="large" name="密码" placeholder="请输入密码"
+                        <van-field v-model="loginForm.password" type="password" size="large" name="密码" placeholder="请输入密码"
                             :rules="[{ required: true, message: '请填写密码',trigger:'onChange' }]">
                             <template #left-icon>
                                 <div class="sprite sprite-password" style="margin-right:10px"></div>

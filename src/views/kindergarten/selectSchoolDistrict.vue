@@ -11,7 +11,7 @@
             <!-- 单元格 -->
             <div class="cells">
                 <van-radio-group v-model="radio">
-                    <van-cell title-class="d-flex ai-center" is-link clickable  v-for="(item,index) in scAreaList" :key="item.scAreaValue">
+                    <van-cell title-class="d-flex ai-center"  v-for="(item,index) in scAreaList" :key="item.scAreaValue">
                         <template #title>
                             <van-radio :name="index + 1" class="text_size">{{item.scArea}}</van-radio>
                         </template>

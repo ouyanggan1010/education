@@ -36,7 +36,7 @@ import {
         data() {
             return {
                 checked: false,
-                totalTime: 60,
+                totalTime: 30,
                 content: '',
                 canClick: true
             }

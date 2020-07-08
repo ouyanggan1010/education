@@ -38,14 +38,12 @@
             </div>
             <van-tabs v-model="active" sticky color="#498ef5" title-active-color="#66a1fb">
                 <van-tab title="学校介绍">
-                    <div class="content_text">
-                        {{detail.scSchoolBrief}}
-                    </div>
+                    <div class="content_text" v-html="detail.scInstructions"></div>
                 </van-tab>
                 <van-tab title="专业与招生">
                     <div class="content_text">
                         <div class="item_cell" v-for="(item, index) in specialty" :key="index" @click="professionDetail(item.midId,item.professionName)">
-                            <div class="cell_left">{{item.professionName}}</div>
+                            <div class="cell_left" style="color:rgb(102, 161, 251)">{{item.professionName}}</div>
                             <div class="cell_right">
                                 <ul>
                                     <li>专业代码：{{item.professionCode}}</li>

@@ -7,8 +7,8 @@
         </van-nav-bar>
         <van-form validate-first @failed="onFailed" @submit="onSubmit" class="cells">
             <!-- 姓名 -->
-            <van-field v-model="formdata.scUserName" name="用户名" placeholder="用户名"
-                :rules="[{ required: true, message: '请填写用户名',trigger:'onChange' }]">
+            <van-field v-model="formdata.scUserName" name="请输入姓名" placeholder="请输入姓名"
+                :rules="[{ required: true, message: '请输入姓名',trigger:'onChange' }]">
                 <template #left-icon>
                     <div class="sprite sprite-user" style="margin-right:10px"></div>
                 </template>
@@ -18,7 +18,7 @@
                 v-model="idTypeChange" 
                 readonly
                 right-icon="arrow"
-                name="证件号码" 
+                name="证件类型" 
                 placeholder="请选择证件类型" 
                 @click="showPicker = true"
                 :rules="[{ required: true, message: '请选择证件类型',trigger:'onChange'}]">
@@ -30,21 +30,21 @@
                 <van-picker show-toolbar :columns="columns" :default-index="columns.indexOf(columns[0])" @confirm="onConfirm" @cancel="showPicker = false"/>
             </van-popup>
             <!-- 证件号码 -->
-            <van-field v-model="formdata.idNumber" name="证件号码" placeholder="请填写证件号码"
-                :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]">
+            <van-field v-model="formdata.idNumber" name="证件号码" placeholder="请输入证件号码"
+                :rules="[{ required: true, message: '请输入证件号码',trigger:'onChange' }]">
                 <template #left-icon>
                     <div class="sprite sprite-card" style="margin-right:10px"></div>
                 </template>
             </van-field>
             <!-- 登录密码 -->
-            <van-field v-model="formdata.password" name="登录密码" placeholder="登录密码"
-                :rules="[{ required: true, message: '请设置登录密码',trigger:'onChange' }]">
+            <van-field v-model="formdata.password" type="password" name="登录密码" placeholder="包含字母和数字，8~20位"
+                :rules="[{ required: true,pattern:/^[0-9A-Za-z]{8,20}$/, message: '包含字母和数字，8~20位',trigger:'onChange' }]">
                 <template #left-icon>
                     <div class="sprite sprite-password" style="margin-right:10px"></div>
                 </template>
             </van-field>
-            <van-field v-model="formdata.repassword" name="登录密码" placeholder="再次确认密码"
-                :rules="[{ required: true,  message: '请再次确认密码',trigger:'onChange' }]">
+            <van-field v-model="formdata.repassword" type="password" name="登录密码" placeholder="请再次输入密码"
+                :rules="[{ required: true,  message: '请再次输入密码',trigger:'onChange' }]">
                 <template #left-icon>
                     <div class="sprite sprite-password" style="margin-right:10px"></div>
                 </template>
@@ -57,7 +57,7 @@
             </van-field>
             <div class="l_check">
                 <div class="l_checkbox">
-                    <van-checkbox v-model="checked">我同意并遵守</van-checkbox>
+                    <van-checkbox v-model="checked">我已阅读并同意</van-checkbox>
                 </div>
                 <div class="l_read">
                     <span class="text" @click="lregister">《注册协议》</span>和<span class="text"
@@ -196,6 +196,7 @@
 
 <style lang="scss" scoped>
     .register {
+        height: 100%;
         background: #fff;
         padding-left: 20px;
         padding-right: 20px;
@@ -203,24 +204,23 @@
         padding-bottom: 50px;
 
         .l_check {
-            margin-top: 25px;
+            margin-top: 35px;
             padding-left: 20px;
             display: flex;
             font-size: 28px;
             .l_read {
                 flex: 1;
-
                 .text {
                     color: #1989fa;
                     cursor: pointer;
                 }
             }
         }
-
         .btn {
             width: 100%;
-            position: absolute;
-            bottom: 40px;
+            margin-top:100px;
+            position: relative;
+            bottom: 0px;
             left: 0;
             padding: 0 30px;
         }

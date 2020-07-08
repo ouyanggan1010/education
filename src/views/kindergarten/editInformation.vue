@@ -7,7 +7,7 @@
         </van-nav-bar>
         <div class="main">
             <div class="header_notice">
-                <van-notice-bar :scrollable="false" background="#f5f6fa" color="red"
+                <van-notice-bar :scrollable="false" wrapable background="#f5f6fa" color="red"
                     text="所录入的信息必须真实，如提供虚假信息，将导致登记无效。" />
             </div>
             <van-form  class="cells">
@@ -52,7 +52,7 @@
                         @cancel="showPickerCertificateType = false" @confirm="onConfirmCertificateType" />
                 </van-popup>
                 <!-- 证件号码 -->
-                <van-field v-model="scChildInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
+                <van-field v-model="scChildInfo.childIdNum" @input="validID" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
                 <!-- 出生日期 -->
                 <van-field
                     v-model="childBirthday"
@@ -105,7 +105,7 @@
                             @cancel="showPickerChilrenTwoInfoType = false" @confirm="onConfirmChilrenTwoInfoType" />
                     </van-popup>
                     <!-- 证件号码 -->
-                    <van-field v-model="scChildTwoInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
+                    <van-field v-model="scChildTwoInfo.childIdNum" @input="validID" name="证件号码" label="证件号码" placeholder="请填写证件号码" :rules="[{ required: true, message: '请填写证件号码',trigger:'onChange' }]"/>
                     <!-- 出生日期 -->
                     <van-field
                         v-model="childTwoBirthday"
@@ -135,7 +135,7 @@
                         @click="showPickerOtherSex = true" :rules="[{ required: true,message:'没有选择性别',trigger:'onChange' }]" />
                     <!-- -------------------------性别选择面板------------------------- -->
                     <van-popup v-model="showPickerOtherSex" round position="bottom">
-                        <van-picker title="请选择性别" show-toolbar :columns="columnsSex" :default-index="scChildTwoInfo.childSex"
+                        <van-picker title="请选择性别" show-toolbar :columns="columnsSex"
                             @cancel="showPickerOtherSex = false" @confirm="onConfirmOtherSex" />
                     </van-popup>
                 </div>
@@ -322,7 +322,7 @@
                     "childIdType": "",
                     "childIdNum": "",
                     "childBirthday": "",
-                    "childSex": "",
+                    "childSex": "0",
                     "childArea": "",
                     "childAddress": ""
                 },
@@ -385,7 +385,11 @@
                 return this.$dayjs( this.scChildInfo.childBirthday).format("YYYY-MM-DD");
             },
             childTwoBirthday() {
-                return this.$dayjs( this.scChildTwoInfo.childBirthday).format("YYYY-MM-DD");
+                let val = '';
+                if(this.scChildTwoInfo.childBirthday != ''){
+                    val =  this.$dayjs( this.scChildTwoInfo.childBirthday).format("YYYY-MM-DD");
+                }
+                return val;
             },
             // 学区1市直属2龙华区直属3美兰区直属4秀英区直属5琼山区直属
             schoolArea() {
@@ -644,6 +648,9 @@
                 }
                 if(this.checked){  // 是双胞胎
                     postData.twins = '0';
+                    this.scChildTwoInfo.childAddress = this.scChildInfo.childAddress
+                    this.scChildTwoInfo.childArea = this.scChildInfo.childArea
+                    // this.scChildTwoInfo.childSex = this.scChildInfo.childSex
                     postData.childInfoReqList.push(this.scChildTwoInfo)
                 
                 }else{ // 不是双胞胎
@@ -723,7 +730,7 @@
                          // 修改申请
                         const res =  await this.$http.put('/mobile/user/updateApply',postData);
                         // console.log(res)
-                        // console.log('双胞胎',postData)
+                        // console.log('单胞胎',postData)
                         // console.log(JSON.stringify(postData))
                         if(res.data.code === 0){
                             this.$toast.success({
@@ -846,6 +853,34 @@
             onConfirmOtResident(value,index) {
                 this.detail.otherResidencePermit = index;
                 this.showPickerOtResident = false
+            },
+             // 根据输入身份证获取出生日期
+            // 幼儿信息身份证验证
+            async validID(value)
+            {
+                // console.log(value)
+                // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+                let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if (reg.test(value)) {
+                    await this.go(value.length);
+                } 
+            },
+            // 实现自动生成生日，性别，年龄
+            go(val) {
+                let iden = this.scChildInfo.childIdNum;
+                let idenTwo = this.scChildTwoInfo.childIdNum;
+                let birth = null;
+                let birthTwo = null;
+                if(val===18){
+                    birth = iden != '' ? iden.substring(6,10)+"-"+iden.substring(10,12)+"-"+iden.substring(12,14):'';
+                    birthTwo = idenTwo !='' ? idenTwo.substring(6,10)+"-"+idenTwo.substring(10,12)+"-"+idenTwo.substring(12,14) :'';
+                }
+                if(val===15){
+                    birth = iden != ''? "19"+ iden.substring(6,8)+"-"+iden.substring(8,10)+"-"+iden.substring(10,12):'';
+                    birthTwo = idenTwo !='' ?  "19"+idenTwo.substring(6,8)+"-"+idenTwo.substring(8,10)+"-"+idenTwo.substring(10,12):'';
+                }
+               this.scChildInfo.childBirthday = birth;
+               this.scChildTwoInfo.childBirthday = birthTwo;
             }
         }
     }

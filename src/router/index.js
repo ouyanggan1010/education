@@ -152,6 +152,15 @@ Vue.use(VueRouter)
       title:"查看申请信息"
     }  
   },
+  // 查看申请详情 上传申请就学所需的材料
+  {
+    path: '/home/kindergarten/lookImg',
+    name: 'LookImg',
+    component: () => import('../views/kindergarten/lookImg.vue'),
+    meta:{
+      title:"查看申请信息"
+    }  
+  },
   //中职首页
   {
     path: '/home/secondarySchool',

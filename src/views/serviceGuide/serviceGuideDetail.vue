@@ -12,9 +12,9 @@
         </div>
         <div class="content " v-html="detail.publisContent"></div>
         <!-- 按钮 -->
-        <div class="btn"  style="margin: 40px 20px 20px 20px;" @click="sign">
+        <!-- <div class="btn"  style="margin: 40px 20px 20px 20px;" @click="sign">
             <van-button color="#498ef5" size="large" native-type="button">我要申请登记</van-button>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -70,9 +70,10 @@ export default {
                 transform: scaleY(.5);
             }
            .title-top{
-               font-size: 35px;
+               font-size: 30px;
            }
            .title-right{
+               margin-top: 15px;
                text-align: right;
                color: #999;
            }
