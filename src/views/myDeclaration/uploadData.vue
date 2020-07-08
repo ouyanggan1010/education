@@ -126,7 +126,7 @@ export default {
         const _this = this;
         await this.$http.put(
           `/mobile/user/${this.model.applyId}/uploadImage`,
-          this.model
+          this.model.imagesReq
         );
         this.$toast.success({
           duration: 1000,
@@ -142,7 +142,7 @@ export default {
     }
   },
   async created() {
-    this.model = this.$route.query;
+    this.model = { ...this.model, ...this.$route.query };
     if (localStorage.pathTo === "/personal/myDeclaration") {
       const res = await this.$http.get(
         `/mobile/user/getApplyFileDetailById/${this.model.applyId}`
@@ -151,15 +151,23 @@ export default {
         const imgsData = res.data.data;
         const imagesReq = {
           // 监护人与孩子的户口簿的图片数组
-          custodianChildAccountImages: imgsData.custodianChildAccountImages,
+          custodianChildAccountImages: imgsData.custodianChildAccountImages
+            ? imgsData.custodianChildAccountImages
+            : "",
           // 出生证明的图片数组
-          birthCertificateImages: imgsData.birthCertificateImages,
+          birthCertificateImages: imgsData.birthCertificateImages
+            ? imgsData.birthCertificateImages
+            : "",
           // 监护人身份证的图片数组
-          custodianIdCardImages: imgsData.custodianIdCardImages,
+          custodianIdCardImages: imgsData.custodianIdCardImages
+            ? imgsData.custodianIdCardImages
+            : "",
           // 预防接种本的图片数组
-          vaccinationImages: imgsData.vaccinationImages,
+          vaccinationImages: imgsData.vaccinationImages
+            ? imgsData.vaccinationImages
+            : "",
           // 居住证/房产证/工作证的图片数组
-          proveImages: imgsData.proveImages
+          proveImages: imgsData.proveImages ? imgsData.proveImages : ""
         };
         localStorage.uploadData = JSON.stringify(imagesReq);
       } else {
