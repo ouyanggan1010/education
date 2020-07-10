@@ -11,21 +11,11 @@
             <!-- 单元格 -->
             <div class="cells">
                 <van-radio-group v-model="radio">
-                    <van-cell title-class="d-flex ai-center"  v-for="(item,index) in scAreaList" :key="item.scAreaValue">
+                    <van-cell title-class="d-flex ai-center" class="cell_line-height" v-for="(item,index) in scAreaList" :key="item.scAreaValue">
                         <template #title>
                             <van-radio :name="index + 1" class="text_size">{{item.scArea}}</van-radio>
                         </template>
                     </van-cell>
-                    <!-- <van-cell  title-class="d-flex ai-center">
-                        <template #title>
-                            <div class="pl-10 text_size">龙华区直属</div>
-                        </template>
-                    </van-cell>
-                    <van-cell title-class="d-flex ai-center" >
-                        <template #title>
-                            <div class="pl-10 text_size">琼山区直属</div>
-                        </template>
-                    </van-cell> -->
                 </van-radio-group>
             </div>
             <!-- 按钮 -->
@@ -109,9 +99,13 @@ export default {
         line-height: 28px;
         text-align: center;
     }
+    .cell_line-height{
+        line-height: 26px;
+        padding: 30px;
+    }
     .text_size{
         font-size: 35px;
-        width: 90%;
+        width: 98%;
     }
     .btn {
         width: 100%;

@@ -131,10 +131,10 @@
                 })
             },
             primary() {// 小学入学登记
-                this.$toast('开发中')
+                this.$toast('预留数据对接')
             },
             junior() {// 初中入学登记
-                this.$toast('开发中')
+                this.$toast('预留数据对接')
             },
             secondarySchool(){ //中职招生入口
                 this.$router.push({

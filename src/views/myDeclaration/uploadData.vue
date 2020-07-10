@@ -124,7 +124,7 @@ export default {
           forbidClick: true
         });
         const _this = this;
-        await this.$http.put(
+        await this.$http.post(
           `/mobile/user/${this.model.applyId}/uploadImage`,
           this.model.imagesReq
         );

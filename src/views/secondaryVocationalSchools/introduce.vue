@@ -9,7 +9,8 @@
             <div class="header_content">
                 <div class="header_logo">
                     <div class="avatar">
-                        <van-image round fit="fill" width="1.9733rem" height="1.9733rem" :src="detail.scLogo" v-if="avatar" />
+                        <!-- <img :src="detail.scLogo" width="100%" height="100%" alt="" style="border-radius:150px"> -->
+                        <van-image round fit="fill" width="1.9733rem" height="1.9733rem" :src="detail.scLogo" />
                     </div>
                     <div class="content">
                         <div class="title">
@@ -41,15 +42,15 @@
                     <div class="content_text" v-html="detail.scInstructions"></div>
                 </van-tab>
                 <van-tab title="专业与招生">
-                    <div class="content_text">
-                        <div class="item_cell" v-for="(item, index) in specialty" :key="index" @click="professionDetail(item.midId,item.professionName)">
+                    <div class="content_text van-hairline--top"><div class="van-hairline--top"></div>
+                        <div class="item_cell van-hairline--bottom" v-for="(item, index) in specialty" :key="index" @click="professionDetail(item.midId,item.professionName)">
                             <div class="cell_left" style="color:rgb(102, 161, 251)">{{item.professionName}}</div>
                             <div class="cell_right">
                                 <ul>
-                                    <li>专业代码：{{item.professionCode}}</li>
-                                    <li>学制：{{item.studyDate}}年</li>
-                                    <li>招生计划：{{item.planNum}}人</li>
-                                    <li>专业类别：{{item.professionType == 0 ? '中专' : '大专'}}</li>
+                                    <li><span style="color:#949494">专业类别：</span> {{item.professionType == 0 ? '中专' : '大专'}}</li>
+                                    <li><span style="color:#949494">专业代码：</span> {{item.professionCode}}</li>
+                                    <li><span style="color:#949494"> 学制：</span>{{item.studyDate}}年</li>
+                                    <li><span style="color:#949494">招生计划：</span> {{item.planNum}}人</li>
                                 </ul>
                             </div>
                         </div>
@@ -88,7 +89,6 @@
                 const res = await this.$http.get(`/mobile/school/mid/info/${scId}`);
                 if(res.data.code === 0){
                     this.specialty = res.data.data
-                    // console.log(this.specialty)
                 }
             },
             // 跳转专业介绍
@@ -119,6 +119,8 @@
                      display: flex;
                      align-items: center;
                     .avatar {
+                        width:1.9733rem;
+                        height:1.9733rem;
                         margin-left: 10px;
                         margin-top: 10px;
                     }
@@ -134,6 +136,7 @@
                             }
                         }
                         .description{
+                            font-size: 28px;
                             margin-top: 10px;
                             .rl{
                                 padding: 4px 8px 4px 8px;
@@ -148,6 +151,7 @@
                     }
                 }
                 .school_text{
+                    font-size: 26px;
                     padding:25px;
                     li{
                         padding: 4px;
@@ -155,33 +159,33 @@
                     }
                 }
             }
-
+            .content_text-instruction{
+                background: #fff;
+            }
             .content_text {
                 background: #fff;
                 padding: 20px;
                 line-height: 50px;
+                font-size: 30px;
+                overflow: hidden;
+                ::v-deep  img{
+                    width: 100% !important;
+                }
+                .van-hairline--bottom{
+                    border-bottom: 1px solid #ccc;
+                }
                 .item_cell{
                     position: relative;
                     padding: 10px;
+                    margin-top: 10px;
                     display: flex;
                     align-items: center;
                     text-align: center;
-                    &::after {
-                        position: absolute;
-                        box-sizing: border-box;
-                        content: ' ';
-                        pointer-events: none;
-                        right: 0;
-                        top: 0;
-                        left: 0;
-                        border-top: 1px solid #ebedf0;
-                        transform: scaleY(.5);
-                    }
                     .cell_left{
                         flex: 1;
                     }
                     .cell_right{
-                        flex:1;
+                        // flex:1;
                         text-align: left;
                     }
                 }

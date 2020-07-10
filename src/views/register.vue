@@ -202,27 +202,32 @@
         padding-right: 20px;
         padding-top: 50px;
         padding-bottom: 50px;
-
-        .l_check {
-            margin-top: 35px;
-            padding-left: 20px;
-            display: flex;
-            font-size: 28px;
-            .l_read {
-                flex: 1;
-                .text {
-                    color: #1989fa;
-                    cursor: pointer;
+        .cells{
+            .van-cell{
+                font-size: 16px;
+                line-height: 28px;
+            }
+            .l_check {
+                margin-top: 35px;
+                padding-left: 20px;
+                display: flex;
+                font-size: 28px;
+                .l_read {
+                    flex: 1;
+                    .text {
+                        color: #1989fa;
+                        cursor: pointer;
+                    }
                 }
             }
-        }
-        .btn {
-            width: 100%;
-            margin-top:100px;
-            position: relative;
-            bottom: 0px;
-            left: 0;
-            padding: 0 30px;
+            .btn {
+                width: 100%;
+                margin-top:100px;
+                position: relative;
+                bottom: 0px;
+                left: 0;
+                padding: 0 30px;
+            }
         }
     }
 </style>

@@ -28,7 +28,7 @@
               class="clearImg"
               @click.stop="imgList.splice(j,1)"
             />
-            <van-image width="100%" height="100%" :src="item.fileName" />
+            <van-image width="100%" height="100%" :src="item" />
           </div>
         </div>
       </div>

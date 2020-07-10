@@ -12,12 +12,12 @@
       <div class="refreshList" v-show="!showCnt && list.length>0">
         <!-- 状态(0待核实 1核实中 2已核实 3未通过核实 4摇号中 5已摇中 6未摇中 7后补 8保存未提交 -->
         <div class="list" v-for="(item,index) in list" :key="index">
-          <div class="name mt-20">{{item.name}}</div>
+          <div class="name mt-20">{{item.childName.substr(0,item.childName.length-1)}}</div>
           <!-- 录取学校：已摇中--资料已提交 -->
           <div
             class="mt-30"
             v-if="item.childState==5 && item.uploadImages==0"
-          >录取学校：{{item.schoolArea}}{{item.applySchool}}</div>
+          >录取学校：{{item.schoolArea | schoolAreaChange}}{{item.applySchool}}</div>
           <!-- 申请类型：除了已摇中--资料已提交 -->
           <div
             class="mt-30 d-flex ai-center"
@@ -40,20 +40,39 @@
             <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==1">已摇中</div>
             <!-- 已摇中---资料已上传 资料核实：0通过 1未通过 2核实中 3待核实 -->
             <!-- 资料待核实 -->
-            <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==3">资料待核实</div>
+            <div
+              class="statusGreen"
+              v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==3"
+            >资料待核实</div>
             <!-- 资料核实中 -->
-            <div class="statusGreen" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==2">资料核实中</div>
+            <div
+              class="statusGreen"
+              v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==2"
+            >资料核实中</div>
             <!-- 资料已核实 -->
-            <div class="statusBlue" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==0">资料已核实</div>
+            <div
+              class="statusBlue"
+              v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==0"
+            >资料已核实</div>
             <!-- 资料未通过核实 -->
-            <div class="statusRed" v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==1">资料未通过核实</div>
-
+            <div
+              class="statusRed"
+              v-if="item.childState==5 && item.uploadImages==0 && item.verifyStatus==1"
+            >资料未通过核实</div>
             <!-- 已摇中：资料未上传 学校某某幼儿园 -->
             <div
               class="tips ml-25"
               v-if="item.childState==5 && item.uploadImages==1"
             >{{item.applySchool}}</div>
-
+            <!-- 查看原因：弹框 未通过核实，已摇中--资料未通过核实 -->
+            <div
+              class="lookReason ml-25"
+              v-if="item.childState==3 || (item.childState==5 && item.uploadImages==0 && item.verifyStatus==1)"
+              @click="lookReason(item)"
+            >
+              <div class="sprite sprite-personal-check"></div>
+              <div class="ml-10">查看原因</div>
+            </div>
             <!-- 摇中后补 -->
             <div class="statusGreen" v-if="item.childState==7">摇中后补（{{item.backLotteryNum}}）号</div>
             <!-- 未摇中 -->
@@ -86,21 +105,8 @@
             <div class="mr-10">详情</div>
             <div class="sprite sprite-detail"></div>
           </router-link>
-          <!-- 查看原因：弹框 未通过核实，已摇中--资料未通过核实 -->
-          <div
-            class="lookMesg"
-            v-if="item.childState==3 || (item.childState==5 && item.uploadImages==0 && item.verifyStatus==1)"
-            @click="lookReason(item)"
-          >
-            <div class="sprite sprite-personal-check"></div>
-            <div class="ml-10">查看原因</div>
-          </div>
-          <!-- 查看消息（已读、未读）：弹框 已摇中（未上传资料） -->
-          <div
-            class="lookMesg"
-            v-if="item.childState==5 && item.uploadImages==1"
-            @click="lookMesg(item.applyId)"
-          >
+          <!-- 查看消息（已读、未读）：弹框 已摇中 -->
+          <div class="lookMesg" v-if="item.childState==5" @click="lookMesg(item.applyId)">
             <!-- 查看消息：1未发送 2未读 3已读 -->
             <div class="sprite sprite-msg-red" v-if="item.msgStatus == 2"></div>
             <div class="ml-10 statusRed" v-if="item.msgStatus == 2">未读消息</div>
@@ -186,7 +192,7 @@ export default {
       // 单个列表的消息数据
       mesgText: {
         msgId: 26,
-        msgContent: "20200706通知", //具体消息
+        msgContent: "", //具体消息
         msgStatus: "",
         createTime: "",
         readTime: ""
@@ -395,9 +401,12 @@ export default {
       }
     },
     // 查看消息弹框关闭
-    lookMesgClose(){
+    lookMesgClose() {
       this.showBoxMesg = false;
-      this.getList();
+      // 2未读，3已读
+      if (this.mesgText.msgStatus == 2) {
+        this.getList();
+      }
     },
     // ---------------------------请求函数--------------------------- //
     // 获取列表信息
@@ -464,6 +473,12 @@ export default {
       .name {
         font-size: 34px;
         color: #333333;
+      }
+      .lookReason {
+        font-size: 24px;
+        color: #498ef5;
+        display: flex;
+        align-items: center;
       }
       .tips {
         color: #333333;

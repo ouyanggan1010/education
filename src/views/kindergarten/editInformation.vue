@@ -7,7 +7,7 @@
         </van-nav-bar>
         <div class="main">
             <div class="header_notice">
-                <van-notice-bar :scrollable="false" wrapable background="#f5f6fa" color="red"
+                <van-notice-bar :scrollable="false" wrapable background="#f5f6fa" class="notice_swipe" color="red"
                     text="所录入的信息必须真实，如提供虚假信息，将导致登记无效。" />
             </div>
             <van-form  class="cells">
@@ -149,9 +149,9 @@
                         :default-index="columnsArea.indexOf(scChildInfo.childArea)" @cancel="showPickerArea = false"
                         @confirm="onConfirmArea" />
                 </van-popup>
-                <!-- 详细户籍地址 -->
-                <van-field rows="2" autosize type="textarea" v-model="scChildInfo.childAddress" name="详细户籍地址"
-                    label="详细户籍地址" placeholder="请输入详细户籍地址" :rules="[{ required: true,message:'没有输入详细户籍地址' }]" />
+                <!-- 详细居住地址 -->
+                <van-field rows="2" autosize type="textarea" v-model="scChildInfo.childAddress" name="详细居住地址"
+                    label="详细居住地址" placeholder="请输入详细居住地址" :rules="[{ required: true,message:'没有输入详细居住地址' }]" />
 
                 <!-- =============================================================================标题：户籍信息 ============================================================================-->
                 <div class="title mt-20">
@@ -887,6 +887,7 @@
 </script>
 
 <style lang="scss" scoped>
+    .notice_swipe{padding: 10px;font-size: 24px;}
     .write_information {
         height: 100%;
         position: relative;

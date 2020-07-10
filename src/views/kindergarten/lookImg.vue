@@ -11,14 +11,15 @@
       <div class="upload">
         <div class="images">
           <div class="imgList" v-for="(item,j) in imgList" :key="j" @click.stop="lookImg(j)">
-            <van-icon
+            <!-- <van-icon
               name="clear"
               size="0.5rem"
               color="#dd5345"
               class="clearImg"
               @click.stop="imgList.splice(j,1)"
-            />
-            <van-image width="100%" height="100%" :src="item.fileName" />
+            /> -->
+            <van-image width="100%" height="100%" :src="item" />
+            <!-- <img width="100%" height="100%" :src="item" alt="" > -->
           </div>
         </div>
       </div>
@@ -32,6 +33,7 @@ export default {
   components: {},
   data() {
     return {
+       typeStatus:'', 
       // 标识字段
       item: {
         name: "",
@@ -54,7 +56,11 @@ export default {
     }
   },
   created() {
-    this.item = this.$route.query;
+    this.item = this.$route.params.item;
+    this.typeStatus = this.$route.params.type;
+    if(this.typeStatus){
+        localStorage.typeStatus = this.typeStatus
+    }
     // 判断是否有图片缓存
     const dataStr = localStorage.applyFileData;
     if (dataStr) {

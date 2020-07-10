@@ -176,9 +176,9 @@
                         :default-index="columnsArea.indexOf(chilrenInfo.childArea)" @cancel="showPickerArea = false"
                         @confirm="onConfirmArea" />
                 </van-popup>
-                <!-- 详细户籍地址 -->
-                <van-field rows="2" autosize type="textarea" v-model="chilrenInfo.childAddress" name="详细户籍地址"
-                    label="详细户籍地址" placeholder="请输入详细户籍地址" :rules="[{ required: true,message:'没有输入详细户籍地址' }]" />
+                <!-- 详细居住地址 -->
+                <van-field rows="2" autosize type="textarea" v-model="chilrenInfo.childAddress" name="详细居住地址"
+                    label="详细居住地址" placeholder="请输入详细居住地址" :rules="[{ required: true,message:'没有输入详细居住地址' }]" />
 
                 <!-- =============================================================================标题：户籍信息 ============================================================================-->
                 <div class="title mt-20">
@@ -988,7 +988,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .notice_swipe{padding: 10px;}
+    .notice_swipe{padding: 10px;font-size: 26px;}
     .write_information {
         height: 100%;
         position: relative;

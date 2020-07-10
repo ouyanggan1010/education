@@ -82,6 +82,10 @@ Vue.prototype.$dayjs = dayjs;
 
 // 混合器
 Vue.mixin({
+  data() { 
+    return {
+    }
+  },
   filters: {
     
   },

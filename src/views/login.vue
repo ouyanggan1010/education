@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <van-nav-bar title="登录" fixed class="navBar" />
+        <van-nav-bar title="" fixed class="navBar"  style="background:#fff" />
         <div class="ScrollContent">
             <div class="login-box">
                 <div class="login-logo">
@@ -48,6 +48,22 @@
                 }
             };
         },
+        computed:{
+            // // 身份证显示
+            // idNumberChange() {
+            //     let val = this.loginForm.idNumber + "";
+            //     let newVal = val;
+            //     if (val.length > 4) {
+            //         const str = val.substring(2, val.length - 2);
+            //         let start = "";
+            //         for (let i = 0; i < str.length; i++) {
+            //         start += "*";
+            //         }
+            //         newVal = val.substring(0, 2) + start + val.substring(val.length - 2);
+            //     }
+            //     return newVal;
+            // }
+        },
         created() {
             // idNumber: '120101199003073134',
             // password: '54321'
@@ -87,14 +103,16 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+    .van-hairline--bottom::after{
+        border: none;
+    }
     .login {
-        min-height: 100%;
+        height: 100%;
         background: #fff;
-
         .ScrollContent {
-            padding-top: 40px;
-
+            padding-top: 60px;
+            height: calc(100% - 500px);
             .login-logo {
                 width: 252px;
                 height: 268px;
@@ -102,27 +120,35 @@
             }
 
             .login-box {
-                min-height: 100%;
+                height: 100%;
                 padding-left: 20px;
                 padding-right: 20px;
                 padding-top: 20px;
-
-                .input-outline {
-                    display: flex;
-                    width: 100%;
-                    padding-left: 30px;
-                    padding-right: 30px;
-                    margin-top: 20px;
-                    font-size: 28px;
-                    line-height: 80px;
-                    color: #999;
-                    .l_middle{
-                        flex: 1;
+                .cells{
+                    .van-cell{
+                        font-size: 16px;
                     }
-                    .lregister {
-                        text-align: right;
-                        color: #1989fa;
-                        width: 120px;
+                    .input-outline {
+                        display: flex;
+                        width: 100%;
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        margin-top: 20px;
+                        font-size: 28px;
+                        line-height: 80px;
+                        color: #999;
+                        .l_middle{
+                            flex: 1;
+                        }
+                        .missPassword{
+                            font-size: 30px;
+                        }
+                        .lregister {
+                            font-size: 30px;
+                            text-align: right;
+                            color: #1989fa;
+                            width: 120px;
+                        }
                     }
                 }
             }

@@ -1,7 +1,7 @@
 
 <template>
   <div id="app" v-cloak>
-    <router-view v-wechat-title="$route.meta.title"></router-view>
+    <router-view></router-view>
     <van-tabbar route v-model="active" active-color="#0099FF" inactive-color="#000" v-if="$route.meta.footShow">
         <van-tabbar-item name="home" replace to="/home" icon="home-o">首页</van-tabbar-item>
         <van-tabbar-item name="personal" replace to="/personal" icon="friends-o">个人中心</van-tabbar-item>

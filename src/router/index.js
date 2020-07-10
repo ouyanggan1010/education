@@ -154,7 +154,7 @@ Vue.use(VueRouter)
   },
   // 查看申请详情 上传申请就学所需的材料
   {
-    path: '/home/kindergarten/lookImg',
+    path: '/home/kindergarten/lookImg/:applyId',
     name: 'LookImg',
     component: () => import('../views/kindergarten/lookImg.vue'),
     meta:{
@@ -307,6 +307,11 @@ Vue.use(VueRouter)
     }
   }
 ]
+// VUE项目中报Error: Avoided redundant navigation to current location: 的错
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 const router = new VueRouter({
   routes

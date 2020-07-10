@@ -79,7 +79,7 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .login {
         min-height: 100%;
         background: #fff;
@@ -98,27 +98,32 @@
                 padding-left: 20px;
                 padding-right: 20px;
                 padding-top: 50px;
-
-                .input-outline {
-                    position: relative;
-                    min-height: 100%;
-                    display: flex;
-                    box-sizing: border-box;
-                    width: 100%;
-                    padding-left: 30px;
-                    padding-right: 30px;
-                    overflow: hidden;
-                    font-size: 28px;
-                    line-height: 80px;
-                    color: #ccc;
-                    .l_middle{
-                        flex: 1;
-                        
+                .cells{
+                    .van-cell{
+                        font-size: 16px;
+                        line-height: 28px;
                     }
-                    .lregister {
-                        text-align: right;
-                        color: #1989fa;
-                        cursor: pointer;
+                    .input-outline {
+                        position: relative;
+                        min-height: 100%;
+                        display: flex;
+                        box-sizing: border-box;
+                        width: 100%;
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: hidden;
+                        font-size: 28px;
+                        line-height: 80px;
+                        color: #ccc;
+                        .l_middle{
+                            flex: 1;
+                            
+                        }
+                        .lregister {
+                            text-align: right;
+                            color: #1989fa;
+                            cursor: pointer;
+                        }
                     }
                 }
             }

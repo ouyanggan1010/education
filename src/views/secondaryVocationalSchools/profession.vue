@@ -10,9 +10,7 @@
             <h3 class="header_notice">
                 {{title}}专业说明
             </h3>
-            <div class="cells">
-                {{detail.professionBrief}}
-            </div>
+            <div class="cells" v-html="detail.professionBrief"></div>
         </div>
     </div>
 </template>
@@ -36,6 +34,8 @@
                 if(res.data.code === 0){
                     this.detail = res.data.data
                     // console.log(this.detail)
+                }else {
+                    this.$toast.fail(res.data.msg);
                 }
             }
         }

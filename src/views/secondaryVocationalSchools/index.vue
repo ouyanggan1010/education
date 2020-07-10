@@ -53,6 +53,7 @@
         name: 'Home',
         data() {
             return {
+                // 截取前面几条数据
                 listData:[]
             }
         },
@@ -68,7 +69,12 @@
                 const res = await this.$http.get(`/mobile/school/list?${postData}`);
                 // console.log( res.data.rows)
                 if(res.data.code === 0){
-                    this.listData  = res.data.rows
+                    this.listData  = res.data.rows;
+                    if(res.data.rows.length>10){
+                        this.listData = res.data.rows.slice(0,10)
+                    }
+                }else{
+                    this.$toast.fail(res.data.msg)
                 }
             },
             schoolDetail(scId) {

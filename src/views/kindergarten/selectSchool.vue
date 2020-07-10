@@ -20,16 +20,6 @@
                             <van-radio :name="index + 1" class="text_size"></van-radio>
                         </div>
                     </div>
-                    <!-- <div class="card_item">
-                        <ul class="item_list">
-                            <li class="li_pdr">海口市港湾幼儿园</li>
-                            <li class="li_style">学校地址：海口市龙华区泰华路10号</li>
-                            <li class="li_style">招生计划：2020年秋季学期招生205人</li>
-                        </ul>
-                        <div class="lposition">
-                            <van-radio name="2" class="text_size"></van-radio>
-                        </div>
-                    </div> -->
                 </van-radio-group>    
             </div>
             <!-- 按钮 -->
@@ -116,7 +106,7 @@ export default {
                 padding: 32px;
                 // color: #999;
                 font-weight: normal;
-                font-size: 30px;
+                font-size: 35px;
                 line-height: 28px;
                 text-align: center;
             }
@@ -143,7 +133,7 @@ export default {
                     .item_list{
                         li{
                             position: relative;
-                            font-size: 28px;
+                            font-size: 30px;
                             line-height: 50px;
                             padding: 5px 0 5px 25px;
                         }

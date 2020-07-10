@@ -11,7 +11,7 @@
             <div class="cells">
                 <van-radio-group v-model="radio">
                     <!-- 海口户籍 -->
-                    <van-cell  title-class="d-flex ai-center" clickable  v-for="(item,index) in list" :key="index">
+                    <van-cell  title-class="d-flex ai-center" class="cell_line-height" clickable  v-for="(item,index) in list" :key="index">
                         <template #title>
                             <van-radio :name="index + 1" class="text_size">{{item.census}}</van-radio>
                         </template>
@@ -79,6 +79,10 @@ export default {
     .text_size{
         font-size: 35px;
         width: 95%;
+    }
+    .cell_line-height{
+        line-height: 26px;
+        padding: 30px;
     }
     .btn {
         width: 100%;

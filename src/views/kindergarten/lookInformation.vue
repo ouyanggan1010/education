@@ -55,7 +55,7 @@
                 <!-- ===================================双胞胎时========================================== -->
                 <div v-if="checked">
                      <!-- 姓名 -->
-                    <van-field v-model="sexChange" name="姓名" label="姓名" placeholder="姓名" />
+                    <van-field v-model="chilrenTwoInfo.childName" name="姓名" label="姓名" placeholder="姓名" readonly/>
                     <!-- 证件类型 -->
                     <van-field 
                     v-model="childTwoInfoIdTypeChange" 
@@ -65,7 +65,7 @@
                     readonly 
                     />
                     <!-- 证件号码 -->
-                    <van-field v-model="chilrenTwoInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" />
+                    <van-field v-model="chilrenTwoInfo.childIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" readonly/>
                     <!-- 出生日期 -->
                     <van-field
                         v-model="childTwoBirthday"
@@ -79,9 +79,9 @@
                 </div>
                 <!-- 现居住区域 -->
                 <van-field v-model="scChildInfo.childArea" name="现居住区域" label="现居住区域" placeholder="请选择现居住区域" readonly/>
-                <!-- 详细户籍地址 -->
-                <van-field rows="2" autosize type="textarea" v-model="scChildInfo.childAddress" name="详细户籍地址"
-                    label="详细户籍地址" placeholder="请输入详细户籍地址" />
+                <!-- 详细居住地址 -->
+                <van-field rows="2" autosize type="textarea" v-model="scChildInfo.childAddress" name="详细居住地址"
+                    label="详细居住地址" placeholder="请输入详细居住地址" readonly/>
 
                 <!-- =============================================================================标题：户籍信息 ============================================================================-->
                 <div class="title mt-20">
@@ -105,7 +105,7 @@
                     <div class="remarks">必须填1位监护人信息</div>
                 </div>
                 <!-- =============监护人：父亲============= -->
-                <van-field v-model="detail.fatherName" name="父亲姓名" label="父亲姓名" placeholder="请填写父亲姓名" />
+                <van-field v-model="detail.fatherName" name="父亲姓名" label="父亲姓名" placeholder="请填写父亲姓名" readonly/>
                 <!-- 证件类型 -->
                 <van-field 
                   v-model="fatherIdType" 
@@ -115,7 +115,7 @@
                   readonly 
                 />
                 <!-- 证件号码 -->
-                <van-field v-model="detail.fatherIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" />
+                <van-field v-model="detail.fatherIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" readonly/>
                 <!-- 居住证 -->
                 <van-field v-model="fatherResidencePermit" name="居住证" label="居住证" placeholder="请选择居住证" readonly />
                 <!-- 联系电话 -->
@@ -155,7 +155,7 @@
                   readonly 
                 />
                 <!-- 证件号码 -->
-                <van-field v-model="detail.otherIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" />
+                <van-field v-model="detail.otherIdNum" name="证件号码" label="证件号码" placeholder="请填写证件号码" readonly/>
                 <!-- 居住证 -->
                 <van-field 
                     v-model="otherResidencePermit" 
@@ -165,7 +165,7 @@
                     readonly
                     />
                 <!-- 联系电话 -->
-                <van-field v-model="detail.otherPhone" name="联系电话" label="联系电话" placeholder="请填写联系电话" />
+                <van-field v-model="detail.otherPhone" name="联系电话" label="联系电话" placeholder="请填写联系电话" readonly/>
                 <!-- <div class="footer_btn">
                     <div class="btn">
                         <div class="right">
@@ -188,7 +188,7 @@
                         :key="j"
                         :title="item.name"
                         is-link
-                        :to="{path:'/home/kindergarten/lookImg',query:item}"
+                        :to="{path:'/home/kindergarten/lookImg',name:'LookImg',params:{'item':item,'type':type}}"
                     />
                  </div>
             </van-form>
@@ -200,6 +200,7 @@
     export default {
         data() {
             return {
+                pathTo:'',
                 type:false,
                 checked:false,
                 disabled:true,
@@ -442,6 +443,16 @@
         created() {
             const applyId =  this.$route.params.applyId;
             const childState =  this.$route.params.type;
+            // 缓存applyId 
+            localStorage.lookImg = applyId;
+            // 是否从查看上传材料返回
+            if(localStorage.typeStatus){
+                this.type = true;
+                localStorage.typeStatus = ''
+                this.getDetail(localStorage.lookImg);
+                this.getApplyFileDetail(localStorage.lookImg);
+            }
+            // 申报列表进入
             if(childState == 5){
                 this.type = true;
                 this.getApplyFileDetail(applyId);
@@ -491,7 +502,7 @@
                     // 清除上传图片的数据
                     localStorage.applyFileData = "";
                 }
-            },
+            }
         }
     }
 </script>

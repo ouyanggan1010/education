@@ -29,13 +29,8 @@
                                 </div>
                             </div>
                             <div class="Llist-right">
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 0 ">财政拨款公办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 1 ">自收自支公办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 2 ">企事业办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 3 ">高校办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 4 ">部队办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 5 ">普惠性民办园</span>
-                                <span class="sprite sprite-school-tag" v-if=" item.scLabel == 6 ">非普惠性民办园</span>
+                                <span class="sprite sprite-school-tag" v-if="item.scLabel == 5">公办</span>
+                                <span class="sprite sprite-school-tag" v-if="item.scLabel == 6">民办</span>
                             </div>
                         </div>
                     </div>
